@@ -43,3 +43,15 @@
 - 在 `get_date.js` 中设置 `api_key` 为你的 News API Key（在文件顶部）。
 - 注意 News API 的请求配额与速率限制；减少刷新频率或使用缓存可以避免达限。
 - 如需更改自动刷新的间隔，请修改文件中 `setInterval` 的间隔值（以毫秒为单位）。
+
+---
+
+## 故障排查 — 编码问题
+
+如果页面出现中文乱码（例如看到不正常的符号而不是中文），通常是文件编码不匹配导致的。解决方法：
+
+- 在代码编辑器（例如 VS Code）中确认并将所有项目文件（`index.html`、`get_date.js` 等）保存为 **UTF-8（无 BOM）**。
+- 在 VS Code 中：右下角编码处点击 → 选择 “Reopen with Encoding” 验证内容 → 然后 “Save with Encoding” 选择 `UTF-8`。
+- 若使用服务器，请确保服务器响应头包含 `Content-Type: text/html; charset=utf-8`。
+
+

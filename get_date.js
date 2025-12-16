@@ -1,3 +1,4 @@
+// 文件编码：UTF-8（请确保文件以 UTF-8 无 BOM 保存以避免显示乱码）
 const api_key = 'e43e60b60d8644a09e9722df8217786e';  // 替换为你自己的 API 密钥
 
 // const api_key = 'YOUR_API_KEY';  // 替换为你自己的 API 密钥
