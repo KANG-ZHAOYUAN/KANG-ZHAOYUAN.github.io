@@ -1,44 +1,44 @@
-// ÎÄ¼ş±àÂë£ºUTF-8£¨ÇëÈ·±£ÎÄ¼şÒÔ UTF-8 ÎŞ BOM ±£´æÒÔ±ÜÃâÏÔÊ¾ÂÒÂë£©
-const api_key = 'e43e60b60d8644a09e9722df8217786e';  // Ìæ»»ÎªÄã×Ô¼ºµÄ API ÃÜÔ¿
+// æ–‡ä»¶ç¼–ç ï¼šUTF-8ï¼ˆè¯·ç¡®ä¿æ–‡ä»¶ä»¥ UTF-8 æ—  BOM ä¿å­˜ä»¥é¿å…æ˜¾ç¤ºä¹±ç ï¼‰
+const api_key = 'e43e60b60d8644a09e9722df8217786e';  // æ›¿æ¢ä¸ºä½ è‡ªå·±çš„ API å¯†é’¥
 
-// const api_key = 'YOUR_API_KEY';  // Ìæ»»ÎªÄã×Ô¼ºµÄ API ÃÜÔ¿
-const news_api_url = `https://newsapi.org/v2/everything?q=world&sortBy=publishedAt&apiKey=${api_key}`;  // ĞÂÎÅ API ÇëÇó URL
+// const api_key = 'YOUR_API_KEY';  // æ›¿æ¢ä¸ºä½ è‡ªå·±çš„ API å¯†é’¥
+const news_api_url = `https://newsapi.org/v2/everything?q=world&sortBy=publishedAt&apiKey=${api_key}`;  // æ–°é—» API è¯·æ±‚ URL
 
-// ¸ñÊ½»¯ÈÕÆÚÎªÖ¸¶¨¸ñÊ½£ºYYYYÄêMMÔÂDDÈÕ
+// æ ¼å¼åŒ–æ—¥æœŸä¸ºæŒ‡å®šæ ¼å¼ï¼šYYYYå¹´MMæœˆDDæ—¥
 function format_date(date) {
-  const year = date.getFullYear();  // »ñÈ¡Äê·İ
-  const month = String(date.getMonth() + 1).padStart(2, '0');  // »ñÈ¡ÔÂ·İ£¬È·±£ÊÇ2Î»
-  const day = String(date.getDate()).padStart(2, '0');  // »ñÈ¡ÈÕÆÚ£¬È·±£ÊÇ2Î»
+  const year = date.getFullYear();  // è·å–å¹´ä»½
+  const month = String(date.getMonth() + 1).padStart(2, '0');  // è·å–æœˆä»½ï¼Œç¡®ä¿æ˜¯2ä½
+  const day = String(date.getDate()).padStart(2, '0');  // è·å–æ—¥æœŸï¼Œç¡®ä¿æ˜¯2ä½
 
-  return `${year}Äê${month}ÔÂ${day}ÈÕ`;  // ·µ»Ø¸ñÊ½»¯ºóµÄÈÕÆÚ
+  return `${year}å¹´${month}æœˆ${day}æ—¥`;  // è¿”å›æ ¼å¼åŒ–åçš„æ—¥æœŸ
 }
 
-// »ñÈ¡½ñÌìµÄÈÕÆÚ²¢ÏÔÊ¾
+// è·å–ä»Šå¤©çš„æ—¥æœŸå¹¶æ˜¾ç¤º
 function fetch_and_display_today_date() {
   fetch(news_api_url)
     .then(response => {
       if (!response.ok) throw new Error(`Network response was not ok (${response.status})`);
-      return response.json();  // ½âÎö·µ»ØµÄ JSON Êı¾İ
+      return response.json();  // è§£æè¿”å›çš„ JSON æ•°æ®
     })
     .then(data => {
       if (!data || !data.articles || data.articles.length === 0 || !data.articles[0].publishedAt) {
         throw new Error('No valid article data');
       }
 
-      // ÌáÈ¡µÚÒ»ÌõĞÂÎÅµÄ·¢²¼Ê±¼ä×÷Îª¡°½ñÌì¡±µÄÈÕÆÚ
-      const published_date = new Date(data.articles[0].publishedAt);  // »ñÈ¡ĞÂÎÅµÄ·¢²¼Ê±¼ä
-      const formatted_date = format_date(published_date);  // ¸ñÊ½»¯ÈÕÆÚÎªÖ¸¶¨¸ñÊ½
+      // æå–ç¬¬ä¸€æ¡æ–°é—»çš„å‘å¸ƒæ—¶é—´ä½œä¸ºâ€œä»Šå¤©â€çš„æ—¥æœŸ
+      const published_date = new Date(data.articles[0].publishedAt);  // è·å–æ–°é—»çš„å‘å¸ƒæ—¶é—´
+      const formatted_date = format_date(published_date);  // æ ¼å¼åŒ–æ—¥æœŸä¸ºæŒ‡å®šæ ¼å¼
 
-      // ÔÚÒ³ÃæÖĞÏÔÊ¾½ñÌìµÄÈÕÆÚ
-      document.getElementById('date_display').innerHTML = `½ñÌìµÄÈÕÆÚÊÇ£º${formatted_date}`;
+      // åœ¨é¡µé¢ä¸­æ˜¾ç¤ºä»Šå¤©çš„æ—¥æœŸ
+      document.getElementById('date_display').innerHTML = `ä»Šå¤©çš„æ—¥æœŸæ˜¯ï¼š${formatted_date}`;
     })
     .catch(error => {
-      console.error('Error fetching news data:', error);  // ´íÎó´¦Àí
+      console.error('Error fetching news data:', error);  // é”™è¯¯å¤„ç†
 
-      // Ê¹ÓÃ±¾µØÊ±¼ä²¢Í£ÓÃ×Ô¶¯Ë¢ĞÂ
+      // ä½¿ç”¨æœ¬åœ°æ—¶é—´å¹¶åœç”¨è‡ªåŠ¨åˆ·æ–°
       const localDate = new Date();
       const formatted_local = format_date(localDate);
-      document.getElementById('date_display').innerHTML = `Ê§°Ü£¬ÏÔÊ¾±¾µØÊ±¼ä£º${formatted_local}£¨ÒÑÍ£Ö¹×Ô¶¯Ë¢ĞÂ£©`;
+      document.getElementById('date_display').innerHTML = `å¤±è´¥ï¼Œæ˜¾ç¤ºæœ¬åœ°æ—¶é—´ï¼š${formatted_local}ï¼ˆå·²åœæ­¢è‡ªåŠ¨åˆ·æ–°ï¼‰`;
 
       if (typeof refreshInterval !== 'undefined' && refreshInterval !== null) {
         clearInterval(refreshInterval);
@@ -46,9 +46,9 @@ function fetch_and_display_today_date() {
     });
 }
 
-// Æô¶¯×Ô¶¯Ë¢ĞÂ£ºÃ¿¸ô60ÃëÖØĞÂ»ñÈ¡²¢ÏÔÊ¾£¨¿É°´Ğèµ÷Õû¼ä¸ô£¬µ¥Î»£ººÁÃë£©
-// ±£´æ·µ»ØÖµÒÔ±ãÔÚÊ§°ÜÊ±¿ÉÒÔÍ£Ö¹×Ô¶¯Ë¢ĞÂ
+// å¯åŠ¨è‡ªåŠ¨åˆ·æ–°ï¼šæ¯éš”60ç§’é‡æ–°è·å–å¹¶æ˜¾ç¤ºï¼ˆå¯æŒ‰éœ€è°ƒæ•´é—´éš”ï¼Œå•ä½ï¼šæ¯«ç§’ï¼‰
+// ä¿å­˜è¿”å›å€¼ä»¥ä¾¿åœ¨å¤±è´¥æ—¶å¯ä»¥åœæ­¢è‡ªåŠ¨åˆ·æ–°
 let refreshInterval = setInterval(fetch_and_display_today_date, 60 * 1000);
 
-// Á¢¼´Ö´ĞĞÒ»´Î
+// ç«‹å³æ‰§è¡Œä¸€æ¬¡
 fetch_and_display_today_date();
