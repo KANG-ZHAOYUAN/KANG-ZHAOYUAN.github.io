@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>是你奶奶！</title>
+    
     <style>
-        /* 简单的 CSS 样式，使页面更易读 */
+        /* 保持不变的 CSS 样式，使页面更易读 */
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
@@ -52,6 +53,7 @@
             background-color: #4cae4c;
         }
     </style>
+    
 </head>
 <body>
 
@@ -60,7 +62,7 @@
 
         <div class="dialog-box">
             <label for="userInput">用户输入：</label>
-            <textarea id="userInput" placeholder="在这里输入您的文本..."></textarea>
+            <textarea id="userInput" placeholder="在这里输入明文或密文..."></textarea>
         </div>
 
         <div class="dialog-box">
@@ -74,33 +76,7 @@
         </div>
     </div>
 
-    <script>
-        function handleEncrypt() {
-            // 以下是获取输入和输出框的代码，保持不变，用于测试功能是否触发。
-            const input = document.getElementById('userInput').value;
-            const output = document.getElementById('outputDisplay');
-            
-            // output.value = "加密功能触发！输入内容：" + input; 
-            // console.log("执行加密操作，输入内容为:", input);
-            
-            // TODO: 在这里添加加密逻辑
-            
-            output.value = "加密功能触发，但逻辑已注释。"; // 告知用户功能已触发
-        }
-
-        function handleDecrypt() {
-            // 以下是获取输入和输出框的代码，保持不变，用于测试功能是否触发。
-            const input = document.getElementById('userInput').value;
-            const output = document.getElementById('outputDisplay');
-            
-            // output.value = "解密功能触发！输入内容：" + input;
-            // console.log("执行解密操作，输入内容为:", input);
-            
-            // TODO: 在这里添加解密逻辑
-            
-            output.value = "解密功能触发，但逻辑已注释。"; // 告知用户功能已触发
-        }
-    </script>
+    <script src="cipher.js"></script>
 
 </body>
 </html>
