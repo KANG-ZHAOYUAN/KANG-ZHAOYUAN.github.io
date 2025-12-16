@@ -12,12 +12,34 @@
 
 ## 项目结构
 
-- **index.html**: 网站的主页。
-- **style.css**: 样式文件。
-- **scripts.js**: 页面交互的 JavaScript 脚本。
+- **index.html**: 网站的主页，包含一个用于显示日期的元素（`id="date_display"`）。
+- **get_date.js**: JavaScript 脚本，调用 News API 获取最新文章时间作为日期、负责自动刷新以及失败时的回退处理。
+- **README.md**: 项目说明文件。
 
 ## 使用说明
 
 1. 克隆仓库到本地：
    ```bash
    git clone git@github.com:KANG-ZHAOYUAN/KANG-ZHAOYUAN.github.io.git
+   ```
+
+2. 本地运行：
+   - 直接在浏览器中打开 `index.html`（部分浏览器可能限制跨域请求）。
+   - 或使用简单 HTTP 服务器，例如：`python -m http.server 8000`，然后访问 `http://localhost:8000`。
+
+---
+
+## 网站功能
+
+- 显示 “今天是：YYYY年MM月DD日”，日期来源于 News API（使用第一篇新闻的 `publishedAt` 字段）。
+- 自动刷新：默认每 60 秒重新请求并更新页面（可在 `get_date.js` 中调整）。
+- 失败回退：当请求失败或返回数据无效时，页面会显示：
+  > 失败，显示本地时间：YYYY年MM月DD日（已停止自动刷新）
+  并停止后续的自动刷新请求，避免触发 API 速率限制。
+- 错误信息会输出到浏览器控制台，便于调试。
+
+## 配置与注意事项
+
+- 在 `get_date.js` 中设置 `api_key` 为你的 News API Key（在文件顶部）。
+- 注意 News API 的请求配额与速率限制；减少刷新频率或使用缓存可以避免达限。
+- 如需更改自动刷新的间隔，请修改文件中 `setInterval` 的间隔值（以毫秒为单位）。
